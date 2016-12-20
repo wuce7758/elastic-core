@@ -58,6 +58,6 @@ public class BasicMapping {
 			
 		});
 		
-		PrintUtil.print(meta);
+//		PrintUtil.print(meta);
 	}
 }

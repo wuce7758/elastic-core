@@ -20,7 +20,7 @@ import com.gerald.elastic.core.meta.source.model.MappingSource;
 import com.gerald.elastic.core.meta.source.model.TypeSource;
 import com.gerald.elastic.core.meta.source.util.DefaultsUtil;
 import com.gerald.elastic.core.meta.source.util.PrimitiveUtil;
-import com.gerald.elastic.core.meta.source.util.ReflectionUtil;
+import com.gerald.elastic.core.util.ReflectionUtil;
 
 class MappingSourceParser {
 	private static final Map<Class<?>, FieldExtractor<?>> EXTRACTORS = new HashMap<Class<?>, FieldExtractor<?>>();

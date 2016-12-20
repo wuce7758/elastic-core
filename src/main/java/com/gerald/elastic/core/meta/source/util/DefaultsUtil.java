@@ -18,6 +18,7 @@ import com.gerald.elastic.core.annotations.types.numeric.IntegerType;
 import com.gerald.elastic.core.annotations.types.numeric.LongType;
 import com.gerald.elastic.core.annotations.types.numeric.ShortType;
 import com.gerald.elastic.core.type.GeoPoint;
+import com.gerald.elastic.core.util.ReflectionUtil;
 
 public class DefaultsUtil {
 	private DefaultsUtil() {

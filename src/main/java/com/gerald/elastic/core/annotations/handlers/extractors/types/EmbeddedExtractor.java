@@ -6,8 +6,8 @@ import java.lang.reflect.Field;
 import com.gerald.elastic.core.annotations.handlers.exceptions.TypeMismatchException;
 import com.gerald.elastic.core.annotations.handlers.models.DocType;
 import com.gerald.elastic.core.annotations.handlers.models.FieldModel;
-import com.gerald.elastic.core.annotations.handlers.util.ReflectionUtil;
 import com.gerald.elastic.core.annotations.types.Embeddable;
+import com.gerald.elastic.core.util.ReflectionUtil;
 
 public class EmbeddedExtractor implements FieldExtractor<Object> {
 
