@@ -2,6 +2,8 @@ package com.gerald.elastic.core.annotations.handlers.exceptions;
 
 import java.lang.reflect.Field;
 
+import com.gerald.elastic.core.util.ReflectionUtil;
+
 public class DuplicatedSubField extends RuntimeException {
 
 	/**
@@ -12,7 +14,7 @@ public class DuplicatedSubField extends RuntimeException {
 	private Field field;
 
 	public DuplicatedSubField(Field field) {
-		super("field = " + field.getDeclaringClass().getName() + "." + field.getName());
+		super("field = " + ReflectionUtil.getFieldFullName(field));
 		this.field = field;
 	}
 	

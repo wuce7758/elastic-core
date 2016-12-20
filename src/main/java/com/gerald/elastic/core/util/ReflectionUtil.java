@@ -77,4 +77,8 @@ public class ReflectionUtil {
 	public static String getFieldFullName(Field field) {
 		return field.getDeclaringClass().getName() + "." + field.getName();
 	}
+	
+	public static String getFieldSimpleName(Field field) {
+		return field.getName();
+	}
 }

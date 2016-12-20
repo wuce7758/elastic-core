@@ -2,6 +2,8 @@ package com.gerald.elastic.core.annotations.handlers.exceptions;
 
 import java.lang.reflect.Field;
 
+import com.gerald.elastic.core.util.ReflectionUtil;
+
 public class MultipleTypeMappingException extends RuntimeException {
 	/**
 	 * 
@@ -11,7 +13,7 @@ public class MultipleTypeMappingException extends RuntimeException {
 	private Field field;
 
 	public MultipleTypeMappingException(Field field) {
-		super("field = " + field.getDeclaringClass().getName() + field.getName());
+		super("field = " + ReflectionUtil.getFieldFullName(field));
 		
 		this.field = field;
 	}
