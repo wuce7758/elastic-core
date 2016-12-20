@@ -1,4 +1,4 @@
-package com.gerald.elastic.core.apis;
+package com.gerald.elastic.core.apis.type;
 
 /**
  * 数据模型抽象 

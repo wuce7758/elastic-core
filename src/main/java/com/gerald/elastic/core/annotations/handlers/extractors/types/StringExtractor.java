@@ -14,6 +14,7 @@ import com.gerald.elastic.core.annotations.handlers.extractors.types.util.FieldL
 import com.gerald.elastic.core.annotations.handlers.models.DocType;
 import com.gerald.elastic.core.annotations.handlers.models.FieldModel;
 import com.gerald.elastic.core.annotations.mapping.parameter.FieldItem;
+import com.gerald.elastic.core.annotations.mapping.parameter.IndexType;
 import com.gerald.elastic.core.annotations.mapping.parameter.SubStringType;
 import com.gerald.elastic.core.annotations.types.StringType;
 
@@ -50,7 +51,6 @@ public class StringExtractor implements FieldExtractor<String> {
 			
 			subFields.put(item.subName(), subField);
 		}
-		
 		
 		FieldModel<String> model = FieldModel.Builder.newInstance(String.class, DocType.STRING)
 														.setAnalyzer(type.analyzer())

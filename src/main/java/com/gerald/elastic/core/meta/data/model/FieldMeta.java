@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import com.gerald.elastic.core.annotations.bridge.DataBridge;
 import com.gerald.elastic.core.annotations.handlers.models.DocType;
 import com.gerald.elastic.core.meta.source.model.FieldSource;
+import com.gerald.elastic.core.util.ReflectionUtil;
 
 public class FieldMeta<T> {
 	private FieldSource<T> source;
@@ -20,12 +21,16 @@ public class FieldMeta<T> {
 		return mapping;
 	}
 	
+	public FieldSource<T> getSource() {
+		return source;
+	}
+	
 	public Field getField() {
 		return source.getField();
 	}
 	
 	public String getFieldName() {
-		return getField().getName();
+		return ReflectionUtil.getFieldSimpleName(getField());
 	}
 	
 	public DataBridge<T,?> getBridge() {

@@ -14,8 +14,8 @@ import com.gerald.elastic.core.meta.MetaBuilder;
 import com.gerald.elastic.core.meta.data.model.MetaData;
 
 @Index(name = "test")
-@Mapping(index = "test", type = "basic_mapping")
-public class BasicMapping {
+@Mapping(index = "test", type = "basic_mapping", datasource = MyDataSource.class)
+public class BasicMapping {	
 	private boolean boolField;
 	
 	private byte byteField;

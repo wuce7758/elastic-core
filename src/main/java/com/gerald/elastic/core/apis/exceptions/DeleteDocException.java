@@ -1,4 +1,4 @@
-package com.gerald.elastic.core.apis;
+package com.gerald.elastic.core.apis.exceptions;
 
 public class DeleteDocException extends RuntimeException {
 

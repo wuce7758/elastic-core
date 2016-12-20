@@ -1,4 +1,4 @@
-package com.gerald.elastic.core.apis;
+package com.gerald.elastic.core.apis.exceptions;
 
 /**
  * 数据模型没有配置数据源

@@ -1,4 +1,4 @@
-package com.gerald.elastic.core.apis;
+package com.gerald.elastic.core.apis.exceptions;
 
 import java.util.List;
 

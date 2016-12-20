@@ -1,8 +1,12 @@
-package com.gerald.elastic.core.apis;
+package com.gerald.elastic.core.apis.doc;
 
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
+
+import com.gerald.elastic.core.apis.exceptions.LackDatasourceException;
+import com.gerald.elastic.core.apis.exceptions.SyncDatasourceException;
+import com.gerald.elastic.core.apis.type.SearchModel;
 
 public interface DocManager {
 	/**

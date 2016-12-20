@@ -32,11 +32,11 @@ public @interface StringType {
 	double boost() default 1;
 	
 	/**
-	 * 是否启用sorting/aggregation/scripting功能。默认启用，一般不用更改
+	 * 是否启用sorting/aggregation/scripting功能。默认不起用，在not_analyzed情况下，一般需要设置为启用
 	 * 
 	 * @return true，启用；false，不启用
 	 */
-	boolean docValues() default true;
+	boolean docValues() default false;
 	
 	/**
 	 * @return

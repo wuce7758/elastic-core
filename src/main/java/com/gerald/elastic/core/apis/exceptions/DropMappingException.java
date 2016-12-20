@@ -1,4 +1,4 @@
-package com.gerald.elastic.core.apis;
+package com.gerald.elastic.core.apis.exceptions;
 
 /**
  * 映射删除异常

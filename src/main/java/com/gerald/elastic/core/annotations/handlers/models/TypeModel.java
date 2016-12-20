@@ -2,6 +2,8 @@ package com.gerald.elastic.core.annotations.handlers.models;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.gerald.elastic.core.annotations.datasource.DataSource;
+
 public class TypeModel implements Model {
 	private String type;
 	
@@ -9,12 +11,16 @@ public class TypeModel implements Model {
 	
 	private String parent;
 	
+	private Class<? extends DataSource<?, ?>> datasourceClazz;
+	
 	public static class Builder {
 		private String type;
 		
 		private String index;
 		
 		private String parent;
+		
+		private Class<? extends DataSource<?, ?>> datasourceClazz;
 
 		public String getType() {
 			return type;
@@ -43,6 +49,15 @@ public class TypeModel implements Model {
 			return this;
 		}
 		
+		public Class<? extends DataSource<?, ?>> getDatasourceClazz() {
+			return datasourceClazz;
+		}
+
+		public Builder setDatasourceClazz(Class<? extends DataSource<?, ?>> datasourceClazz) {
+			this.datasourceClazz = datasourceClazz;
+			return this;
+		}
+
 		public TypeModel build() {
 			return new TypeModel(this);
 		}
@@ -62,6 +77,8 @@ public class TypeModel implements Model {
 		} else {
 			this.parent = builder.parent;
 		}
+		
+		this.datasourceClazz = builder.datasourceClazz;
 	}
 
 	/**
@@ -89,5 +106,9 @@ public class TypeModel implements Model {
 	 */
 	public String getParent() {
 		return parent;
+	}
+
+	public Class<? extends DataSource<?, ?>> getDatasourceClazz() {
+		return datasourceClazz;
 	}
 }

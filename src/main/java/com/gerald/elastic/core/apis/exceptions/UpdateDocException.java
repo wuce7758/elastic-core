@@ -1,6 +1,8 @@
-package com.gerald.elastic.core.apis;
+package com.gerald.elastic.core.apis.exceptions;
 
 import java.util.Map;
+
+import com.gerald.elastic.core.apis.type.SearchModel;
 
 public class UpdateDocException extends RuntimeException {
 

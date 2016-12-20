@@ -1,5 +1,6 @@
 package com.gerald.elastic.core.annotations.handlers.models;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -160,23 +161,35 @@ public class FieldModel<T> implements Model {
 			throw new IllegalArgumentException("java type = " + builder.getJavaType() + ", doc type = " + builder.getDocType());
 		}
 		
-		this.analyzer = builder.analyzer;
-		if(!this.analyzer.isIgnored() && StringUtils.isEmpty(analyzer.value())) {
-			analyzer = TypeWrapper.valueOf((String)null);
+		if(!builder.analyzer.isIgnored() && !StringUtils.isEmpty(builder.analyzer.value())) {
+			this.analyzer = builder.analyzer;
+		} else {
+			//空串表示使用默认配置，不需要该字段
+			this.analyzer = TypeWrapper.ignored();
 		}
 		
 		this.boost = builder.boost;
 		this.coerce = builder.coerce;
 		this.docType = builder.docType;
+		this.docValues = builder.docValues;		
 		this.fields = builder.fields;
 		this.indexType = builder.indexType;
 		this.javaType = builder.javaType;
-		this.nullValue = builder.nullValue;
+		
+		if(!builder.nullValue.isIgnored() && builder.nullValue.value() != null) {
+			this.nullValue = builder.nullValue;
+		} else {
+			this.nullValue = TypeWrapper.ignored();
+		}		
+		
 		this.positionIncrementGap = builder.positionIncrementGap;
 		
-		this.searchAnalyzer = builder.searchAnalyzer;
-		if(!searchAnalyzer.isIgnored() && StringUtils.isEmpty(searchAnalyzer.value())) {
-			searchAnalyzer = TypeWrapper.valueOf((String)null);
+		
+		if(!builder.searchAnalyzer.isIgnored() && !StringUtils.isEmpty(builder.searchAnalyzer.value())) {
+			this.searchAnalyzer = builder.searchAnalyzer;
+		} else {
+			//空串表示使用默认配置，不需要该字段
+			this.searchAnalyzer = TypeWrapper.ignored();
 		}
 	}
 
@@ -188,39 +201,45 @@ public class FieldModel<T> implements Model {
 		return docType;
 	}
 
-	public TypeWrapper<String> getAnalyzer() {
-		return analyzer;
-	}
-
-	public TypeWrapper<Double> getBoost() {
-		return boost;
-	}
-
-	public TypeWrapper<IndexType> getIndexType() {
-		return indexType;
-	}
-
 	public TypeWrapper<Map<String, FieldModel<T>>> getFields() {
 		return fields;
 	}
-
-	public TypeWrapper<T> getNullValue() {
-		return nullValue;
-	}
-
-	public TypeWrapper<Integer> getPositionIncrementGap() {
-		return positionIncrementGap;
-	}
-
-	public TypeWrapper<String> getSearchAnalyzer() {
-		return searchAnalyzer;
-	}
-
-	public TypeWrapper<Boolean> getCoerce() {
-		return coerce;
-	}
-
-	public TypeWrapper<Boolean> getDocValues() {
-		return docValues;
+	
+	public Map<String, Object> params() {
+		Map<String, Object> params = new HashMap<String, Object>();
+		
+		if(!analyzer.isIgnored()) {
+			params.put("analyzer", analyzer.value());
+		}
+		
+		if(!boost.isIgnored()) {
+			params.put("boost", boost.value());
+		}
+		
+		if(!docValues.isIgnored()) {
+			params.put("doc_values", docValues.value());
+		}
+		
+		if(!indexType.isIgnored()) {
+			params.put("index", indexType.value().getType());
+		}
+		
+		if(!nullValue.isIgnored()) {
+			params.put("null_value", nullValue.value());
+		}
+		
+		if(!positionIncrementGap.isIgnored()) {
+			params.put("position_increment_gap", positionIncrementGap.value());
+		}
+		
+		if(!searchAnalyzer.isIgnored()) {
+			params.put("search_analyzer", searchAnalyzer.value());
+		}
+		
+		if(!coerce.isIgnored()) {
+			params.put("coerce", coerce.value());
+		}
+		
+		return params;
 	}
 }

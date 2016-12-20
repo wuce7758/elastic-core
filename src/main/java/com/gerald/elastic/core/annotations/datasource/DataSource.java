@@ -1,4 +1,4 @@
-package com.gerald.elastic.core.apis;
+package com.gerald.elastic.core.annotations.datasource;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -12,7 +12,7 @@ import java.util.Iterator;
  * 			id类型
  * 
  */
-public interface EsDataSource<T,D> {
+public interface DataSource<T,D> {
 	/**
 	 * 获得指定id的数据
 	 * 

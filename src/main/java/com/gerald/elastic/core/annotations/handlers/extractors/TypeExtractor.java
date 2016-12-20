@@ -20,12 +20,14 @@ public class TypeExtractor implements Extractor {
 		
 		TypeModel.Builder builder = new TypeModel.Builder().setIndex(mapping.index())
 														   .setParent(mapping.parent())
-														   .setType(mapping.type());
+														   .setType(mapping.type())
+														   .setDatasourceClazz(mapping.datasource());
 		
 		TypeModel model = builder.build();
 		
-		logger.info(String.format("entity = %s, index = %s, type = %s, parent = %s", 
-				clazz.getName(), model.getIndex(), model.getType(), model.getParent()));
+		logger.info(String.format("entity = %s, index = %s, type = %s, parent = %s, datasource = %s", 
+				clazz.getName(), model.getIndex(), model.getType(), model.getParent(), 
+				builder.getDatasourceClazz().getName()));
 		
 		return model;
 	}

@@ -5,6 +5,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import com.gerald.elastic.core.annotations.datasource.DataSource;
+
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface Mapping {
@@ -28,4 +30,11 @@ public @interface Mapping {
 	 * @return index名字
 	 */
 	String index();
+	
+	/**
+	 * 数据源
+	 * 
+	 * @return 数据源
+	 */
+	Class<? extends DataSource<?,?>> datasource();
 }
