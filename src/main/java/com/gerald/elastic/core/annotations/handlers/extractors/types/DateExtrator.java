@@ -7,14 +7,19 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.gerald.elastic.core.annotations.handlers.exceptions.TypeMismatchException;
+import com.gerald.elastic.core.annotations.handlers.extractors.types.util.FieldLoggingUtil;
 import com.gerald.elastic.core.annotations.handlers.models.DocType;
 import com.gerald.elastic.core.annotations.handlers.models.FieldModel;
 import com.gerald.elastic.core.annotations.types.DateType;
 
 public class DateExtrator implements FieldExtractor<Date> {
 	private static final SimpleDateFormat FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	
+	private static final Logger logger = LogManager.getLogger(DateExtrator.class);
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -34,11 +39,15 @@ public class DateExtrator implements FieldExtractor<Date> {
 			throw new RuntimeException(e);
 		}
 		
-		return FieldModel.Builder.<Date>newInstance((Class<? extends Date>)javaType, DocType.DATE)
-											 .setBoost(type.boost())
-											 .setDocValues(type.docValues())
-											 .setIndexType(type.index())
-											 .setNullValue(nullValue)
-											 .build();
+		FieldModel<Date> model = FieldModel.Builder.<Date>newInstance((Class<? extends Date>)javaType, DocType.DATE)
+															 .setBoost(type.boost())
+															 .setDocValues(type.docValues())
+															 .setIndexType(type.index())
+															 .setNullValue(nullValue)
+															 .build();
+		
+		FieldLoggingUtil.debug(model, field, logger);
+		
+		return model;
 	}
 }

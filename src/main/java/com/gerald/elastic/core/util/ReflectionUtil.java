@@ -73,4 +73,8 @@ public class ReflectionUtil {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	public static String getFieldFullName(Field field) {
+		return field.getDeclaringClass().getName() + "." + field.getName();
+	}
 }

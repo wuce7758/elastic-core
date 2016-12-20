@@ -5,8 +5,12 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.gerald.elastic.core.annotations.handlers.exceptions.DuplicatedSubField;
 import com.gerald.elastic.core.annotations.handlers.exceptions.TypeMismatchException;
+import com.gerald.elastic.core.annotations.handlers.extractors.types.util.FieldLoggingUtil;
 import com.gerald.elastic.core.annotations.handlers.models.DocType;
 import com.gerald.elastic.core.annotations.handlers.models.FieldModel;
 import com.gerald.elastic.core.annotations.mapping.parameter.FieldItem;
@@ -14,6 +18,7 @@ import com.gerald.elastic.core.annotations.mapping.parameter.SubStringType;
 import com.gerald.elastic.core.annotations.types.StringType;
 
 public class StringExtractor implements FieldExtractor<String> {
+	private static final Logger logger = LogManager.getLogger(StringExtractor.class);
 
 	@Override
 	public FieldModel<String> extract(Annotation annotation, Class<?> javaType,
@@ -47,16 +52,20 @@ public class StringExtractor implements FieldExtractor<String> {
 		}
 		
 		
-		return FieldModel.Builder.newInstance(String.class, DocType.STRING)
-										.setAnalyzer(type.analyzer())
-										.setBoost(type.boost())
-										.setDocValues(type.docValues())
-										.setFields(subFields)
-										.setIndexType(type.index())
-										.setNullValue(type.nullValue().getValue())
-										.setPositionIncrementGap(type.positionIncrementGap())
-										.setSearchAnalyzer(type.searchAnalyzer())
-										.build();
+		FieldModel<String> model = FieldModel.Builder.newInstance(String.class, DocType.STRING)
+														.setAnalyzer(type.analyzer())
+														.setBoost(type.boost())
+														.setDocValues(type.docValues())
+														.setFields(subFields)
+														.setIndexType(type.index())
+														.setNullValue(type.nullValue().getValue())
+														.setPositionIncrementGap(type.positionIncrementGap())
+														.setSearchAnalyzer(type.searchAnalyzer())
+														.build();
+		
+		FieldLoggingUtil.debug(model, field, logger);
+		
+		return model;
 	}
 
 }
